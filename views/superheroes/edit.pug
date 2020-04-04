@@ -1,0 +1,36 @@
+extends ../layout.pug
+
+block content
+  .create-container
+    h1 Edit The Comic Character: #{superhero.name}
+    br
+    div(style='width: 60%; margin: 25px auto;')
+      form(action="/superheroes/" + superhero.id + "?_method=PUT",  method="post", enctype="multipart/form-data")
+        .form-group
+          label(for='charaterName') Charater Name: 
+          input#charaterName.from-control(type="text" value=superhero.name placeholder="charater name" required="required" name="superhero")
+        .form-grop
+          label(for='characterPicture') Charater Picture: 
+          input#exampleFormControlFile1.form-control-file(type="file" name="file" placeholder="charater picture" accept="image/*" required="required")
+        .form-group
+          label(for='charaterDecription') Charater Decription: 
+          textarea#charaterDecription.form-control(rows='3' name="description")= superhero.description
+        .form-group
+            button.btn.btn-lg.btn-primary.btn-block Update
+      div(class="card" style="width: 18rem;")
+        img(class="card-img-top" src='/img/superheroes/' + superhero.image alt="superheroe.image")
+      a(href='javascript:history.back()') Go Back  
+      
+
+  //- h1 Edit The Comic Character: #{superhero.name}
+  //- //- p This is a form that you can use to edit a superhero
+  //- form(action="/superheroes/" + superhero.id + "?_method=PUT" method="post" enctype="multipart/form-data")
+  //-     input(type="file" placeholder="superhero picture" name="file")
+  //-     input(type="text" value=superhero.name placeholder="superhero name" required="required" name="superhero")
+  //-     button Update
+
+  //- div(class="card" style="width: 18rem;")
+  //-   img(class="card-img-top" src='/img/superheroes/' + superhero.image alt="superheroe.image")
+  //-   div(class="card-body")
+  //-     h5(class="card-title")= superhero.name
+  //-     p(class="card-text")= superhero.name

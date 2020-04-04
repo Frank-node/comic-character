@@ -1,0 +1,64 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+.superhero-container {
+  display: inline-block;
+  height: 100px;
+  text-align: center;
+  margin-right: 10px;
+  margin-bottom: 40px;
+}  
+
+.superhero-container a {
+  color: black;
+  text-decoration: none;
+}
+
+.create-container {
+  padding: 10px;
+}
+
+.create-container input[type="text"] {
+  font-size: 16px;
+  padding: 5px;
+}
+
+.create-container button {
+  font-size: 16px;
+  padding: 5px;
+  margin-left: 10px;
+}
+
+#show-img {
+  width: 40%;
+}
+
+.card {
+  padding: 0;
+}
+
+.card .caption-full {
+  padding: 9px;
+}
+
+#delete-form {
+  display: inline;
+}
+
+/* form {
+  border:1px solid greenyellow;
+  width:50%;
+  background: rgb(201, 231, 157);
+  text-align:left;
+  font-size:16px;
+  margin: auto;
+  padding:50px 50px 50px 50px;
+} */

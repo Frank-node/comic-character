@@ -1,0 +1,11 @@
+# exclude the follow files
+# dependencies  npm package files
+**/node_modules
+
+# production package files
+**/build
+
+# MAC misc 
+.DS_Store
+
+npm-debug.log*

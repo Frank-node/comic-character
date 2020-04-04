@@ -1,0 +1,62 @@
+extends ../layout.pug
+
+block content
+  .row
+    //- .col-md-3
+    //-   p.lead Comic
+    //-   .list-group
+    //-     li.list-group-item.active Info 1
+    //-     li.list-group-item Info 2
+    //-     li.list-group-item Info 3
+    .col-md-9
+      .card
+        img#show-img.card-img-top.mx-auto(src='/img/superheroes/' + superhero.image alt='...')
+        .card-body
+          .caption-full
+          h6.float-right
+            em Submitted By #{superhero.author.username}
+          h4
+            a= superhero.name
+          p= superhero.description
+          
+          if(currentUser && superhero.author.id.equals(currentUser.id))
+            a(href="/superheroes/" + superhero.id + "/edit" class="btn btn-warning btn-xs") Edit
+            form#delete-form(action="/superheroes/" + superhero.id + "?_method=DELETE" method='POST')
+              button.btn.btn-danger.btn-xs Delete
+      br
+      .card.bg-light
+        .text-right
+          a.btn.btn-success(href="/superheroes/"+ superhero.id + "/comments/new") Add New Comment
+        br
+        each comment in superhero.comments
+          .row
+            .col-md-12
+              strong= comment.author.username
+              span.float-right 10 days ago
+              p #{comment.text}
+              if(currentUser && comment.author.id.equals(currentUser.id))
+                a(href="/superheroes/" + superhero.id + "/comments/" + comment.id + "/edit" class="btn btn-warning btn-xs") Edit
+                form#delete-form(action="/superheroes/" + superhero.id + "/comments/" + comment.id + "?_method=DELETE" method='POST')
+                  button.btn.btn-danger.btn-xs Delete
+
+            
+      
+
+
+  //- div(class="card" style="width: 18rem;")
+  //-   img(class="card-img-top" src='/img/superheroes/' + superhero.image alt="superhero.image")
+  //-   div(class="card-body")
+  //-     h5(class="card-title")= superhero.name
+  //-     p(class="card-text")= superhero.name
+  //-     a(href="/superheroes/"+ superhero.id + "/comments/new" class="btn btn-success") New Comment
+  //-     each comment in superhero.comments
+  //-       p
+  //-         strong= comment.author
+  //-         |
+  //-         | - #{comment.text}
+
+block bottomNavigation
+  a(href="/superheroes" class="btn btn-link") Go back
+
+block footer
+  div(style="background-color: red")=superhero.name
