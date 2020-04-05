@@ -1,3 +1,6 @@
+//Set environment variables
+require('dotenv').config();
+
 // Create a express server
 const express = require('express');
 const app = express();
@@ -62,32 +65,9 @@ app.set('view engine', 'pug');
 
 //Set the mongoose to connect mongodb
 const mongoose = require('mongoose');
-//let uri = 'mongodb://localhost/superherodb';
-let uri = 'mongodb+srv://nodetest:dbTestbc@cluster0-3osxf.mongodb.net/superherodb?retryWrites=true&w=majority';
+//let uri = process.env.LOCAL_DB;
+let uri = process.env.CLOUD_DB
 mongoose.connect(uri, {useNewUrlParser: true,useUnifiedTopology: true});
-
-
-//Setup the superhero schema, default collection name is superheros
-// const supheroSchema = new mongoose.Schema({
-//   name: String,
-//   image: String
-// }, { collection: 'superheroes' }); //Set a different name for your collection
-
-// const Superhero = mongoose.model("Superhero",supheroSchema);
-
-// Superhero.create(
-//   {
-//     name: 'CAPTAIN MARVEL',
-//     image: 'captainmarvel.jpg'
-//   },
-//   function(err, superhero){
-//     if(err){
-//       console.log(err);
-//     } else {
-//       console.log("Newly created superhero");
-//       console.log(superhero);
-//     }
-//   });
 
 app.use("/", indexRoutes);
 app.use("/superheroes", superheroRoutes);
@@ -97,7 +77,6 @@ app.use("/superheroes/:id/comments", commentRoutes);
 const port = process.env.PORT || 3000;
 
 // configure the port that expressis going to listen to
-
 app.listen(port, (err) => {  
   if (err) {
     return console.log(`Unable to start the server on port ${port}`, err);
@@ -105,23 +84,7 @@ app.listen(port, (err) => {
   console.log(`This HTTP server is running on port ${port}`);
 });
 
-// app.get('/', (req, res) => {
-//   res.render('index', {});
-// });
-// const superheroes = [
-//   { id: 1, name: 'SPIDER-MAN', image: 'spiderman.jpg' },
-//   { id: 2, name: 'CAPTAIN MARVEL', image: 'captainmarvel.jpg' },
-//   { id: 3, name: 'HULK', image: 'hulk.jpg' },
-//   { id: 4, name: 'THOR', image: 'thor.jpg' },
-//   { id: 5, name: 'IRON MAN', image: 'ironman.jpg' },
-//   { id: 6, name: 'DAREDEVIL', image: 'daredevil.jpg' },
-//   { id: 7, name: 'BLACK WIDOW', image: 'blackwidow.jpg' },
-//   { id: 8, name: 'CAPTAIN AMERICA', image: 'captanamerica.jpg' },
-//   { id: 9, name: 'WOLVERINE', image: 'wolverine.jpg' },
-//   { id: 10, name: 'LUKE CAGE', image: 'lukecage.jpg' },
-//   { id: 11, name: 'BATMAN', image: 'file-1583548086696Batman.jpg' },
-//   { id: 12, name: 'ANT MAN', image: 'file-1583553186723Ant-Man.png' }
-//];
+
 
 
 

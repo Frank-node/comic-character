@@ -2,14 +2,14 @@ extends ../layout.pug
 
 block content
   .create-container
-    h3.text-center Edit The Comic Character: #{superhero.name}
+    h3 Edit The Comic Character: #{superhero.name}
     br
     .card.mb-3(style='max-width: 80%;')
       .row.no-gutters
-        .col-md-4
+        .col-md-5
           //- img.card-img(src='...' alt='...')
-          img#show-img.card-img.mx-auto(src='/img/superheroes/' + superhero.image alt='Character Picture')
-        .col-md-8
+          img#show-img.card-img.mx-auto(src=superhero.image alt='Character Picture')
+        .col-md-7
           .card-body
             form(action="/superheroes/" + superhero.id + "?_method=PUT",  method="post", enctype="multipart/form-data")
               .form-group

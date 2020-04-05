@@ -47,9 +47,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
        });
       }
   });
-  //create new comment
-  //connect new comment to campground
-  //redirect campground show page
+  
 });
 
 // COMMENT EDIT ROUTE
@@ -86,13 +84,5 @@ router.delete("/:comment_id", middleware.checkCommentOwnership, function(req, re
       }
    });
 });
-
-//middleware
-// function isLoggedIn(req, res, next){
-//   if(req.isAuthenticated()){
-//       return next();
-//   }
-//   res.redirect("/login");
-// }
 
 module.exports = router;

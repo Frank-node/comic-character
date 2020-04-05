@@ -5,12 +5,16 @@ block content
     .row.no-gutters
       .col-md-5
         //- img.card-img(src='...' alt='...')
-        img#show-img.card-img.mx-auto(src='/img/superheroes/' + superhero.image alt='Character Picture')
+        if superhero.image.startsWith('http')
+          img#show-img.card-img.mx-auto(src=superhero.image alt='Character Picture')
+        else
+            img#show-img.card-img.mx-auto(src='/img/superheroes/'+ superhero.image alt='Character Picture')
+                  
       .col-md-7
         .card-body
           .caption-full
             h6.float-right
-              em Submitted By 
+              em Posted By 
                 a.card-link(href='/superheroes?author='+ superhero.author.id) #{superhero.author.username}
             h4
               a= superhero.name

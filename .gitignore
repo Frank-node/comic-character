@@ -8,4 +8,8 @@
 # MAC misc 
 .DS_Store
 
+#environment variables file
+.env
+
 npm-debug.log*
+

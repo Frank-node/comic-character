@@ -22,10 +22,14 @@ block content
       .col-lg-2.col-md-3.col-sm-4.single-card
         .card
           a(href="/superheroes/" + superhero.id)
-            img(class="card-img-top" src='/img/superheroes/' + superhero.image alt="superheroe.image")
+            if superhero.image.startsWith('http')
+              img(class="card-img-top" src=superhero.image alt="Character Picture")
+            else
+              img(class="card-img-top" src='/img/superheroes/'+ superhero.image alt="Character Picture")
+            
             div(class="card-body")
                 h5(class="card-title")= superhero.name
                 //- a.btn.btn-primary(href="/superheroes/" + superhero.id) More Info
           .card-footer.text-muted
-            small <em> Submitted By 
+            small <em> Posted By 
               a.card-link(href='/superheroes?author='+ superhero.author.id) #{superhero.author.username} </em>
