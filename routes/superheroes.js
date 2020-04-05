@@ -130,9 +130,9 @@ router.post('/', middleware.isLoggedIn, upload.single('file'), (req, res) => {
     console.log('file',req.file);
 
     //let deletedFilename = __dirname + "/public/img/superheroes/"+ newSuperhero.image;
-    //let deletedFilename = path.resolve(__dirname, '../'+ req.file.path);
+    let deletedFilename = path.resolve(__dirname, '../'+ req.file.path);
     //delete temporary file in the local upload folder
-    //deleteTemFile(deletedFilename);
+    deleteTemFile(deletedFilename);
     
     // add author to campground
     const author = {
@@ -192,9 +192,9 @@ router.put('/:id', middleware.checkSuperheroOwnership, upload.single('file'), (r
         console.log('newSuperhero: ' + newSuperhero);
 
         //let deletedFilename = __dirname + "/public/img/superheroes/"+ newSuperhero.image;
-        //let deletedFilename = path.resolve(__dirname, '../'+ req.file.path);
+        let deletedFilename = path.resolve(__dirname, '../'+ req.file.path);
         //delete temporary file in the local upload folder
-        //deleteTemFile(deletedFilename);
+        deleteTemFile(deletedFilename);
                 
         Superhero.findByIdAndUpdate(req.params.id, {$set: newSuperhero}, function(err, originalSuperhero){
           if(err){
