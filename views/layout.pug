@@ -3,7 +3,8 @@ html(lang='en')
   head
     title Simple site using Node.js, Express and Pug
     link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous")
-    link(rel='stylesheet', href="/css/styles.css")
+    link(rel='stylesheet', href="/css/main.css")
+    
     block styles
     script(src="/js/scripts.js")
     block scripts
@@ -33,15 +34,9 @@ html(lang='en')
         .alert.alert-danger(role='alert')= error
       if(success && success.length > 0)
         .alert.alert-success(role='alert')= success      
-    div(class="jumbotron")    
-      if current
-        h1 #{currentUser.username}'s Comic Characters
-      else
-        h1 Comic Characters
-      p This site shows comic characters information
-      
+         
 
-    div(class="container")
+    .container
       block content
       block bottomNavigation
     block footer

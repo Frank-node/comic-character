@@ -26,7 +26,7 @@ router.post("/register", function(req, res){
           return res.redirect("register");
        }
        passport.authenticate("local")(req, res, function(){
-        req.flash("success", "Welcome to Marvel " + user.username);
+        req.flash("success", "Welcome to Comic " + user.id);
         res.redirect("/superheroes"); 
        });
    });
@@ -42,7 +42,11 @@ router.post("/login", passport.authenticate("local",
        //successRedirect: "/superheroes",
        failureRedirect: "/login",
     failureFlash: 'Invalid username or password.' }), function(req, res){
-    res.redirect('/superheroes?author=' + req.user.id);
+    console.log(req.user.username)
+    if (req.user.username === 'admin')
+      res.redirect('/superheroes');
+    else
+      res.redirect('/superheroes?author=' + req.user.id);
 });
 
 // logic route

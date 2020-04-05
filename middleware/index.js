@@ -13,9 +13,11 @@ middlewareObj.checkSuperheroOwnership = function(req, res, next) {
             res.redirect('/superheroes');
            }  else {
                // does user own the campground?
-            if(foundSuperhero.author.id.equals(req.user._id)) {
+            if(foundSuperhero.author.id.equals(req.user._id) || req.user.username === 'admin') {
+                
                 next();
             } else {
+                
                 req.flash('error', 'You don\'t have permission to do that!');
                 res.redirect('/superheroes/' + req.params.id);
             }
@@ -35,7 +37,7 @@ middlewareObj.checkCommentOwnership = function(req, res, next) {
                 res.redirect('/superheroes');
            }  else {
                // does user own the comment?
-            if(foundComment.author.id.equals(req.user._id)) {
+            if(foundComment.author.id.equals(req.user._id)|| req.user.username === 'admin') {
                 next();
             } else {
                 res.redirect('/superheroes/' + req.params.id);

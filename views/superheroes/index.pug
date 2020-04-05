@@ -1,25 +1,31 @@
 extends ../layout.pug
 
 block content
-  a(href="/superheroes/new" class="btn btn-primary") Create
+  .jumbotron  
+      if current
+        h1 #{current}'s Comic Characters
+      else
+        h1 Comic Characters
+      p This site shows comic characters information
+
+      if !currentUser
+        a(href="/superheroes/new" class="btn btn-primary") Create
+      else if !(currentUser.username === 'admin')
+        a(href="/superheroes/new" class="btn btn-primary") Create
   hr
-  
-  .card-deck.row.row-cols-4.text-center
-      //- .row.row-cols-4.text-center
-      each superhero in superheroes
+  .row.text-center
+    //- .card-deck
+        //- .row.row-cols-4.text-center
+    
+    //- .card-deck
+    each superhero in superheroes
+      .col-lg-2.col-md-3.col-sm-4.single-card
         .card
           a(href="/superheroes/" + superhero.id)
             img(class="card-img-top" src='/img/superheroes/' + superhero.image alt="superheroe.image")
             div(class="card-body")
                 h5(class="card-title")= superhero.name
-                //- p(class="card-text")= superhero.name
-                //- .row.justify-content-center
-                //- a(href="/superheroes/" + superhero.id + "/edit" class="btn btn-warning btn-xs") Edit
-                //- form#delete-form(action="/superheroes/" + superhero.id + "?_method=DELETE" method='POST')
-                //-   button.btn.btn-danger.btn-xs Delete
-                //- a(href="/superheroes/" + superhero.id + "?_method=DELETE" class="btn btn-danger") Delete
-                  
-        //-img(src='/img/superheroes/' + superhero.image  width='200px') 
-        //-h3= superhero.name
-
-
+                //- a.btn.btn-primary(href="/superheroes/" + superhero.id) More Info
+          .card-footer.text-muted
+            small <em> Submitted By 
+              a.card-link(href='/superheroes?author='+ superhero.author.id) #{superhero.author.username} </em>

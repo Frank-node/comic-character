@@ -1,7 +1,45 @@
 extends ../layout.pug
 
 block content
-  .row
+  .card.mb-3(style='max-width: 80%;')
+    .row.no-gutters
+      .col-md-5
+        //- img.card-img(src='...' alt='...')
+        img#show-img.card-img.mx-auto(src='/img/superheroes/' + superhero.image alt='Character Picture')
+      .col-md-7
+        .card-body
+          .caption-full
+            h6.float-right
+              em Submitted By 
+                a.card-link(href='/superheroes?author='+ superhero.author.id) #{superhero.author.username}
+            h4
+              a= superhero.name
+            
+          p.card-text= superhero.description
+          
+          
+          if(currentUser && superhero.author.id.equals(currentUser.id) || currentUser && currentUser.username === 'admin')
+                    a(href="/superheroes/" + superhero.id + "/edit" class="btn btn-warning btn-sm") Edit
+                    form#delete-form(action="/superheroes/" + superhero.id + "?_method=DELETE" method='POST')
+                      button.btn.btn-danger.btn-sm Delete
+  br
+  .card.bg-light(style='max-width: 80%;')
+    .text-right
+      a.btn.btn-success.btn-sm(href="/superheroes/"+ superhero.id + "/comments/new") Add New Comment
+    br
+    each comment in superhero.comments
+      .row
+        .col-md-12
+          strong <em> #{comment.author.username} </em>
+          //- span.float-right 10 days ago
+          p #{comment.text}
+          if(currentUser && comment.author.id.equals(currentUser.id) || currentUser && currentUser.username === 'admin')
+            a(href="/superheroes/" + superhero.id + "/comments/" + comment.id + "/edit" class="btn btn-warning btn-sm") Edit
+            form#delete-form(action="/superheroes/" + superhero.id + "/comments/" + comment.id + "?_method=DELETE" method='POST')
+              button.btn.btn-danger.btn-sm Delete
+              
+
+  //- .row
     //- .col-md-3
     //-   p.lead Comic
     //-   .list-group
@@ -58,5 +96,5 @@ block content
 block bottomNavigation
   a(href="/superheroes" class="btn btn-link") Go back
 
-block footer
+//- block footer
   div(style="background-color: red")=superhero.name

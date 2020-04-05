@@ -1,15 +1,17 @@
 extends ../layout.pug
 
 block content
-  .row
-    h1(style='text-align: center') Edit Comment
-    br
-    div(style='width: 50%; margin: 25px auto;')
-      form(action="/superheroes/"+ superhero_id + "/comments/" + comment.id + "?_method=PUT" method='POST')
-        .form-group
-          input.form-control(type='text' name='comment[text]' placeholder='comment' value=comment.text)
-        //- .form-group
-        //-   input.form-control(type='text' name='comment[author]' placeholder='author')
-        .form-group
-          button.btn.btn-lg.btn-primary.btn-block Submit!
-      a(href='javascript:history.back()') Go Back
+  //- .row.text-center
+  //- .create-container
+      
+  h3.text-center Edit Comment
+
+  div(style='width: 50%; margin: 25px auto;')
+    form(action="/superheroes/"+ superhero_id + "/comments/" + comment.id + "?_method=PUT" method='POST')
+      .form-group
+        input.form-control(type='text' name='comment[text]' placeholder='comment' value=comment.text)
+      //- .form-group
+      //-   input.form-control(type='text' name='comment[author]' placeholder='author')
+      .form-group
+        button.btn.btn-lg.btn-primary.btn-block Submit!
+    a(href='javascript:history.back()') Go Back

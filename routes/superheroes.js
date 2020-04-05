@@ -2,6 +2,7 @@ var express = require("express");
 var router  = express.Router();
 var Superhero = require("../models/superhero");
 var middleware = require("../middleware");
+var User = require("../models/user");
 
 //Use multer Module to handle the files uploaded
 const multer  = require('multer');
@@ -24,33 +25,45 @@ const upload = multer({ storage: storage });
 // ====================
 
 //Set the router for the list of all superheroes page or the superheroes created by current user
-router.get('/', (req, res) => {
-  
-  if(!req.query.author){
-  //Get all superheroes from mongodb
-  Superhero.find({},function(err, allSuperheroes){
-    if(err){
-      console.log(err);
-    } else {
-      allSuperheroes.reverse();
-      res.render('superheroes/index', { superheroes: allSuperheroes });
-      console.log(allSuperheroes);
-     }
-  })
-  //res.render('index', { superheroes: superheroes });
-} else {
+router.get('/', (req, res) => {  
+  if(req.query.author){
+    //Get he superheroes created by current user
     console.log(req.query.author);
-    Superhero.find().where('author.id').equals(req.query.author).exec(function(err, allSuperheroes){
-      if(err){
-        console.log(err);
+    User.findById(req.query.author, function(err, foundUser){
+      if(err || !foundUser){
+          console.log(err);
+          req.flash('error', 'Sorry, that user does not exist!');
+          res.redirect('/superheroes');
       } else {
-        allSuperheroes.reverse();
-        res.render('superheroes/index', {superheroes: allSuperheroes, current: 'true'});
-        console.log(allSuperheroes);
-       }
-    })
-
-}
+          if(foundUser.username === 'admin')
+            res.redirect('/superheroes');
+          else{
+          Superhero.find().where('author.id').equals(req.query.author).exec(function(err, allSuperheroes){
+          if(err){
+            console.log(err);
+          } else {
+            allSuperheroes.reverse();
+            res.render('superheroes/index', {superheroes: allSuperheroes, current: foundUser.username});
+            console.log(allSuperheroes);
+          }
+        })
+      }
+      }})
+    
+ //res.render('index', { superheroes: superheroes });
+  } else {
+  //Get all superheroes from mongodb
+      Superhero.find({},function(err, allSuperheroes){
+        if(err){
+          console.log(err);
+        } else {
+          allSuperheroes.reverse();
+          res.render('superheroes/index', { superheroes: allSuperheroes });
+          console.log(allSuperheroes);
+         }
+      })
+  }
+  //res.redirect("/");
 });
 
 //Get the new superhero view
@@ -133,7 +146,7 @@ router.delete("/:id", middleware.checkSuperheroOwnership, async(req,res)=>{
           console.log('successfully deleted images from folder superheroes');
         });
       }
-    res.redirect("/superheroes");
+    res.redirect("/superheroes?author="+ currentUser.id);
   } catch (error) {
     res.redirect("/superheroes");
   }
@@ -214,7 +227,7 @@ router.put('/:id', middleware.checkSuperheroOwnership, upload.single('file'), (r
 
   const newSuperhero = {
     name: req.body.superhero.toUpperCase(), 
-    image: req.file.filename
+    description: req.body.description
   }
 
   if (req.file){
