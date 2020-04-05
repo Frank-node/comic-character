@@ -42,7 +42,7 @@ router.post("/login", passport.authenticate("local",
        //successRedirect: "/superheroes",
        failureRedirect: "/login",
     failureFlash: 'Invalid username or password.' }), function(req, res){
-    console.log(req.user.username)
+    //console.log(req.user.username)
     if (req.user.username === 'admin')
       res.redirect('/superheroes');
     else

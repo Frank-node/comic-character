@@ -44,7 +44,7 @@ cloudinary.config({
 router.get('/', (req, res) => {  
   if(req.query.author){
     //Get he superheroes created by current user
-    console.log(req.query.author);
+    //console.log('author id: ' + req.query.author);
     User.findById(req.query.author, function(err, foundUser){
       if(err || !foundUser){
           console.log(err);
@@ -95,7 +95,7 @@ router.get('/:id', (req, res) => {
       console.log(err);
     } else {
       res.render('superheroes/show', { superhero: foundSuperhero });
-      console.log(foundSuperhero);
+      //console.log(foundSuperhero);
     }
   })
   
