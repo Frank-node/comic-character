@@ -14,4 +14,4 @@
 npm-debug.log*
 
 #upload folder
-**/public/img/superheroes
+#**/public/img/superheroes
