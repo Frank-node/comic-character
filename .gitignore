@@ -9,7 +9,7 @@
 .DS_Store
 
 #environment variables file
-.env
+#.env
 
 npm-debug.log*
 
