@@ -2,20 +2,20 @@ extends ../layout.pug
 
 block content
   .create-container
-    h1 Create a New Comic Character
+    h1 Add a New Image
     br
     div(style='width: 60%; margin: 25px auto;')
       form(action="/superheroes",  method="post", enctype="multipart/form-data")
         .form-group
-          label(for='charaterName') Charater Name: 
+          label(for='charaterName') Image Name: 
           input#charaterName.from-control(type="text" placeholder="charater name" required="required" name="superhero")
         .form-grop
-          label(for='characterPicture') Charater Picture: 
+          label(for='characterPicture') Image File: 
           input#exampleFormControlFile1.form-control-file(type="file" name="file" placeholder="charater picture" accept="image/*" required="required")
         .form-group
-          label(for='charaterDecription') Charater Decription: 
+          label(for='charaterDecription') Image Decription: 
           textarea#charaterDecription.form-control(rows='5' name="description")
         .form-group
-            button.btn.btn-lg.btn-primary.btn-block(type='submit') Create
+            button.btn.btn-lg.btn-primary.btn-block(type='submit') Add
       a(href='javascript:history.back()') Go Back  
       

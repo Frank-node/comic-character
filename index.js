@@ -65,8 +65,9 @@ app.set('view engine', 'pug');
 
 //Set the mongoose to connect mongodb
 const mongoose = require('mongoose');
+
 //let uri = process.env.LOCAL_DB;
-let uri = process.env.CLOUD_DB
+let uri = process.env.CLOUD_DB;
 mongoose.connect(uri, {useNewUrlParser: true,useUnifiedTopology: true});
 
 app.use("/", indexRoutes);

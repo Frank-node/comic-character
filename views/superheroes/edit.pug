@@ -2,44 +2,31 @@ extends ../layout.pug
 
 block content
   .create-container
-    h3 Edit The Comic Character: #{superhero.name}
+    h3 Edit The Image: #{superhero.name}
     br
-    .card.mb-3(style='max-width: 80%;')
-      .row.no-gutters
-        .col-md-5
+    .card.mb-3(style='max-width: 100%;')
+      .row.no-guttersImage
+        .col-md-4
           //- img.card-img(src='...' alt='...')
-          img#show-img.card-img.mx-auto(src=superhero.image alt='Character Picture')
-        .col-md-7
+          if superhero.image.startsWith('http')
+            img#show-img.card-img.mx-auto(src=superhero.image alt='Image')    
+          else
+            img#show-img.card-img.mx-auto(src='/img/superheroes/'+ superhero.image alt='Image')
+        .col-md-8
           .card-body
             form(action="/superheroes/" + superhero.id + "?_method=PUT",  method="post", enctype="multipart/form-data")
               .form-group
-                label(for='charaterName') Charater Name: 
+                label(for='charaterName') Image Name: 
                 input#charaterName.from-control(type="text" value=superhero.name placeholder="charater name" required="required" name="superhero")
               .form-grop
-                label(for='characterPicture') Charater Picture: 
+                label(for='characterPicture') Image File: 
                 input#exampleFormControlFile1.form-control-file(type="file" name="file" placeholder="charater picture" accept="image/*")
               .form-group
-                label(for='charaterDecription') Charater Decription: 
+                label(for='charaterDecription') Image Decription: 
                 textarea#charaterDecription.form-control(rows='5' name="description")= superhero.description
               .form-group
                   button.btn.btn-lg.btn-primary.btn-block Update
           
-
-      //- div(style='width: 60%; margin: 25px auto;')
-      //-   form(action="/superheroes/" + superhero.id + "?_method=PUT",  method="post", enctype="multipart/form-data")
-      //-     .form-group
-      //-       label(for='charaterName') Charater Name: 
-      //-       input#charaterName.from-control(type="text" value=superhero.name placeholder="charater name" required="required" name="superhero")
-      //-     .form-grop
-      //-       label(for='characterPicture') Charater Picture: 
-      //-       input#exampleFormControlFile1.form-control-file(type="file" name="file" placeholder="charater picture" accept="image/*" required="required")
-      //-     .form-group
-      //-       label(for='charaterDecription') Charater Decription: 
-      //-       textarea#charaterDecription.form-control(rows='3' name="description")= superhero.description
-      //-     .form-group
-      //-         button.btn.btn-lg.btn-primary.btn-block Update
-      //-   div(class="card" style="width: 18rem;")
-      //-     img(class="card-img-top" src='/img/superheroes/' + superhero.image alt="superheroe.image")
       a(href='javascript:history.back()') Go Back  
       
 

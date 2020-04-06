@@ -3,15 +3,15 @@ extends ../layout.pug
 block content
   .jumbotron  
       if current
-        h1 #{current}'s Comic Characters
+        h1 #{current}'s Image Gallery
       else
-        h1 Comic Characters
-      p This site shows comic characters information
+        h1 Image Gallery
+      p Users can add, update, delete the images and comments by this site.
 
       if !currentUser
-        a(href="/superheroes/new" class="btn btn-primary") Create
+        a(href="/superheroes/new" class="btn btn-primary") Add New Image
       else if !(currentUser.username === 'admin')
-        a(href="/superheroes/new" class="btn btn-primary") Create
+        a(href="/superheroes/new" class="btn btn-primary") Add New Image
   hr
   .row.text-center
     //- .card-deck
@@ -19,17 +19,18 @@ block content
     
     //- .card-deck
     each superhero in superheroes
-      .col-lg-2.col-md-3.col-sm-4.single-card
+      .col-lg-3.col-md-4.col-sm-4.single-card
         .card
           a(href="/superheroes/" + superhero.id)
             if superhero.image.startsWith('http')
-              img(class="card-img-top" src=superhero.image alt="Character Picture")
+              img(class="card-img-top" src=superhero.image alt="Image")
             else
-              img(class="card-img-top" src='/img/superheroes/'+ superhero.image alt="Character Picture")
+              img(class="card-img-top" src='/img/superheroes/'+ superhero.image alt="Image")
             
             div(class="card-body")
                 h5(class="card-title")= superhero.name
                 //- a.btn.btn-primary(href="/superheroes/" + superhero.id) More Info
+            
           .card-footer.text-muted
             small <em> Posted By 
               a.card-link(href='/superheroes?author='+ superhero.author.id) #{superhero.author.username} </em>

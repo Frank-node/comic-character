@@ -1,16 +1,33 @@
 extends ../layout.pug
 
 block content
-  .card.mb-3(style='max-width: 80%;')
+  .card.mb-3(style='max-width: 100%;')
     .row.no-gutters
-      .col-md-5
+      .col-md-4
         //- img.card-img(src='...' alt='...')
         if superhero.image.startsWith('http')
-          img#show-img.card-img.mx-auto(src=superhero.image alt='Character Picture')
+          img#show-img.card-img.mx-auto(src=superhero.image alt='Image')    
         else
-            img#show-img.card-img.mx-auto(src='/img/superheroes/'+ superhero.image alt='Character Picture')
-                  
-      .col-md-7
+          img#show-img.card-img.mx-auto(src='/img/superheroes/'+ superhero.image alt='Image')
+
+        button.btn.btn-primary(type='button' data-toggle='modal' data-target='#exampleModalCenter') View
+        #exampleModalCenter.modal.fade(tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true')
+          .modal-dialog.modal-lg(role='document')
+            .modal-content
+              .modal-header
+                h5#exampleModalLongTitle.modal-title= superhero.name
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                  span(aria-hidden='true') &times;
+              .modal-body.text-center
+                if superhero.image.startsWith('http')
+                  img.img-fluid(src=superhero.image alt='Image')   
+                else
+                  img.img-fluid(src='/img/superheroes/'+ superhero.image alt='Image')
+              .modal-footer
+                button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+
+
+      .col-md-8
         .card-body
           .caption-full
             h6.float-right
@@ -27,7 +44,7 @@ block content
                     form#delete-form(action="/superheroes/" + superhero.id + "?_method=DELETE" method='POST')
                       button.btn.btn-danger.btn-sm Delete
   br
-  .card.bg-light(style='max-width: 80%;')
+  .card.bg-light(style='max-width: 100%;')
     .text-right
       a.btn.btn-success.btn-sm(href="/superheroes/"+ superhero.id + "/comments/new") Add New Comment
     br

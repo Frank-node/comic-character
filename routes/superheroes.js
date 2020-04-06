@@ -109,7 +109,7 @@ router.delete("/:id", middleware.checkSuperheroOwnership, async(req,res)=>{
   try {
     let deletedSuperhero = await Superhero.findById(req.params.id);
     await deletedSuperhero.remove();
-    console.log(deletedSuperhero);
+    //console.log(deletedSuperhero);
     //destroy the file from cloudinary
     destroyFromCloudinary(deletedSuperhero.image); 
     
@@ -154,7 +154,7 @@ router.post('/', middleware.isLoggedIn, upload.single('file'), (req, res) => {
       } else {
         console.log("Newly created comic character");
         res.redirect('/superheroes'); //redirect back to the homepage
-        console.log(newlyCreated);
+        //console.log(newlyCreated);
       }
     });
   });  
@@ -168,7 +168,7 @@ router.get('/:id/edit', middleware.checkSuperheroOwnership, (req, res) => {
       console.log(err);
     } else {
       res.render('superheroes/edit', { superhero: foundSuperhero });
-      console.log(foundSuperhero);
+      //console.log(foundSuperhero);
     }
   })
 
@@ -189,7 +189,7 @@ router.put('/:id', middleware.checkSuperheroOwnership, upload.single('file'), (r
       cloudinary.uploader.upload(req.file.path, function(result) {
         console.log('result.secure_url:' + result.secure_url);
         newSuperhero.image = result.secure_url;
-        console.log('newSuperhero: ' + newSuperhero);
+        //console.log('newSuperhero: ' + newSuperhero);
 
         //let deletedFilename = __dirname + "/public/img/superheroes/"+ newSuperhero.image;
         let deletedFilename = path.resolve(__dirname, '../'+ req.file.path);
